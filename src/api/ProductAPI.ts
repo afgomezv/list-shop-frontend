@@ -72,3 +72,18 @@ export async function deleteProduct({
     }
   }
 }
+
+export async function updateIsBuyProduct({
+  listId,
+  productId,
+}: Pick<ProductAPI, "listId" | "productId">) {
+  try {
+    const url = `/lists/${listId}/products/${productId}/isbuy`;
+    const { data } = await api.patch(url);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}

@@ -6,7 +6,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Product } from "../../types";
 import { formatCurrency } from "../../utils";
-import { deleteProduct } from "../../api/ProductAPI";
+import { deleteProduct, updateIsBuyProduct } from "../../api/ProductAPI";
 
 type ProductCardProps = {
   product: Product;
@@ -25,9 +25,16 @@ export default function ProductCard({ product }: ProductCardProps) {
       toast.success(data.message);
       queryClient.invalidateQueries({ queryKey: ["ViewList", listId] });
     },
-    onError: (error) => {
-      toast.error(error.message);
+    onError: (error) => toast.error(error.message),
+  });
+
+  const { mutate: updateIsBuy } = useMutation({
+    mutationFn: updateIsBuyProduct,
+    onSuccess: (data) => {
+      toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["ViewList", listId] });
     },
+    onError: (error) => toast.error(error.message),
   });
 
   return (
@@ -43,11 +50,16 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.name}
         </button>
         <p className="text-xl font-semibold text-green-avocado">
-          $ {formatCurrency(product.price!)}
+          {formatCurrency(product.price!)} COP
         </p>
-        <p className="text-sm text-green-avocado">{product.stock!} unidades</p>
+        <p className="text-sm text-green-avocado">
+          {product.stock} {product.stock! > 1 ? "Unidades" : "Unidad"}
+        </p>
 
-        <div className="mt-2">
+        <button
+          className="mt-2 cursor-pointer"
+          onClick={() => updateIsBuy({ listId, productId: product.id })}
+        >
           <span
             className={`px-3 py-1 rounded-full text-sm font-medium ${
               product.isBuy
@@ -57,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           >
             {product.isBuy ? "Comprado" : "No Comprado"}
           </span>
-        </div>
+        </button>
       </div>
       <div className="flex items-center shrink-0 gap-x-6">
         <Menu as="div" className="relative flex-none">
