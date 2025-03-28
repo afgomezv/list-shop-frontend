@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Menu, Transition } from "@headlessui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { List } from "../../types";
+
 import { EllipsisVertical } from "lucide-react";
 import { deleteList } from "../../api/ListAPI";
+import { ListCard } from "../../types";
 
 type CardProjectProps = {
-  list: List;
+  list: ListCard;
 };
 
 export default function CardList({ list }: CardProjectProps) {

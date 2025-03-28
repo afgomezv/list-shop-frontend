@@ -33,14 +33,15 @@ export type User = z.infer<typeof userSchema>;
 export const productSchema = z.object({
   id: z.number(),
   name: z.string(),
-  price: z.number(),
-  stock: z.number(),
+  price: z.number().nullable(),
+  stock: z.number().nullable(),
   isBuy: z.boolean(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
 
 export type Product = z.infer<typeof productSchema>;
+export type ProductFormData = Pick<Product, "name" | "price" | "stock">;
 
 /** List */
 
@@ -63,3 +64,4 @@ export const listsSchema = z.array(listDashboardSchema);
 
 export type List = z.infer<typeof listSchema>;
 export type ListFormData = Pick<List, "name" | "description">;
+export type ListCard = Pick<List, "id" | "name" | "description">;

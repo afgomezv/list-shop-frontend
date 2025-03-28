@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getListById } from "../api/ListAPI";
 import ProductList from "../components/products/ProductList";
+import AddProductModal from "../components/products/AddProductModal";
+import EditProductData from "../components/products/EditProductData";
+import ProductModalDetails from "../components/products/ProductModalDetails";
 
 export default function ListDetailView() {
   const navigate = useNavigate();
@@ -35,6 +38,9 @@ export default function ListDetailView() {
             </button>
           </nav>
           <ProductList products={data.products} />
+          <AddProductModal />
+          <EditProductData />
+          <ProductModalDetails />
         </div>
       </>
     );

@@ -23,7 +23,7 @@ export default function ListView() {
               to="/lists/create"
               className="bg-green-avocado hover:bg-green-dark px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors rounded-lg"
             >
-              Nuevo Lista
+              Nueva Lista
             </Link>
           </nav>
           {data.length ? (

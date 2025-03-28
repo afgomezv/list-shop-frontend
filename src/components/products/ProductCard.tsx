@@ -6,6 +6,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Product } from "../../types";
 import { formatCurrency } from "../../utils";
+import { deleteProduct } from "../../api/ProductAPI";
 
 type ProductCardProps = {
   product: Product;
@@ -15,19 +16,19 @@ export default function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
   const params = useParams();
 
-  const productId = +params.productId!;
+  const listId = +params.listId!;
 
-  //   const queryClient = useQueryClient();
-  //   const { mutate } = useMutation({
-  //     mutationFn: deleteTask,
-  //     onSuccess: (data) => {
-  //       toast.success(data.message);
-  //       queryClient.invalidateQueries({ queryKey: ["EditProject", projectId] });
-  //     },
-  //     onError: (error) => {
-  //       toast.error(error.message);
-  //     },
-  //   });
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: (data) => {
+      toast.success(data.message);
+      queryClient.invalidateQueries({ queryKey: ["ViewList", listId] });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
   return (
     <li className="p-5 bg-white border-b border-slate-300 flex justify-between gap-3">
@@ -42,14 +43,15 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.name}
         </button>
         <p className="text-xl font-semibold text-green-avocado">
-          $ {formatCurrency(product.price)}
+          $ {formatCurrency(product.price!)}
         </p>
+        <p className="text-sm text-green-avocado">{product.stock!} unidades</p>
 
         <div className="mt-2">
           <span
             className={`px-3 py-1 rounded-full text-sm font-medium ${
               product.isBuy
-                ? "bg-green-100 text-green-avocado"
+                ? "bg-red-100 text-red-500"
                 : "bg-gray-100 text-gray-800"
             }`}
           >
@@ -78,7 +80,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                   type="button"
                   className="block w-full px-3 py-1 text-sm leading-6 text-left text-gray-900 hover:bg-gray-100 cursor-pointer"
                   onClick={() =>
-                    navigate(location.pathname + `?viewTask=${product.id}`)
+                    navigate(location.pathname + `?viewProduct=${product.id}`)
                   }
                 >
                   Ver Producto
@@ -99,7 +101,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <button
                   type="button"
                   className="block w-full px-3 py-1 text-sm leading-6 text-left text-red-500 font-semibold hover:bg-red-50 cursor-pointer"
-                  //onClick={() => mutate({ projectId, taskId: task._id })}
+                  onClick={() => mutate({ listId, productId: product.id })}
                 >
                   Eliminar Producto
                 </button>

@@ -18,7 +18,7 @@ export default function ListForm({ register, errors }: ProjectFormProps) {
           type="text"
           placeholder="Nombre de la lista"
           {...register("name", {
-            required: "El Nombre del Proyecto es obligatorio",
+            required: "El nombre de la lista es obligatorio",
           })}
         />
 
@@ -31,7 +31,7 @@ export default function ListForm({ register, errors }: ProjectFormProps) {
           className="w-full p-3  border border-gray-200 rounded-lg focus:outline-none focus:border-green-dark"
           placeholder="Descripción de la lista"
           {...register("description", {
-            required: "La descripción del proyecto es obligatoria",
+            required: "La descripción de la lista es obligatoria",
           })}
         />
 
