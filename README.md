@@ -1,54 +1,47 @@
-# React + TypeScript + Vite
+# 🎨 Frontend - Lista de Compras
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es el frontend de la aplicación web para gestionar listas de compras en tiempo real. Permite a los usuarios crear, editar y marcar artículos como comprados con una interfaz intuitiva y actualizaciones en vivo. 🚀
 
-Currently, two official plugins are available:
+## 🏗️ Tecnologías Utilizadas
+- **React + TypeScript** - Para una estructura de componentes robusta y tipada.
+- **Zod** - Validación de formularios y datos con TypeScript.
+- **Tailwind CSS v4** - Estilización rápida y optimizada.
+- **React Router** - Manejo de rutas y navegación.
+- **React Lucide** - Íconos modernos y personalizables.
+- **React Query** - Gestión eficiente del estado y caché de datos.
+- **Axios** - Cliente HTTP para interactuar con la API.
+- **React Toastify** - Notificaciones elegantes y dinámicas.
+- **Socket.io-client** - Comunicación en tiempo real con el backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Características
+- ✅ **Gestión de Artículos:** Agregar, editar, eliminar y marcar artículos como comprados.
+- ✅ **Actualización en Tiempo Real:** Sincronización instantánea con la API mediante WebSockets.
+- ✅ **Interfaz Moderna:** Diseño limpio y responsivo con Tailwind CSS.
+- ✅ **Validaciones Seguras:** Uso de Zod para validar datos antes de enviarlos a la API.
+- ✅ **Navegación Fluida:** Rutas gestionadas con React Router.
+- ✅ **Notificaciones Dinámicas:** Alertas visuales con React Toastify.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🚀 Instalación y Ejecución
+### 1️⃣ Clonar el repositorio
+```sh
+  git clone https://github.com/afgomezv/list-shop-frontend.git
+  cd list-shop-frontend
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 2️⃣ Instalar dependencias
+```sh
+  npm install
 ```
+### 3️⃣ Configurar variables de entorno
+Crear un archivo `.env` en la raíz del proyecto con la siguiente configuración:
+```env
+VITE_API_URL=http://localhost:4000
+```
+### 4️⃣ Ejecutar la aplicación
+```sh
+  npm run dev
+```
+El frontend estará corriendo en `http://localhost:5173` 🚀
+
+## 📜 Licencia
+Este proyecto está bajo la licencia MIT. Puedes usarlo y modificarlo libremente. 🚀
+
