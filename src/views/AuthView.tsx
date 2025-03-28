@@ -1,6 +1,7 @@
 import { useState } from "react";
-import LoginForm from "../components/LoginForm";
-import RegisterForm from "../components/RegisterForm";
+import { ToastContainer } from "react-toastify";
+import LoginForm from "../components/auth/LoginForm";
+import RegisterForm from "../components/auth/RegisterForm";
 
 export default function AuthView() {
   const [isLogin, setIsLogin] = useState(true);
@@ -32,9 +33,10 @@ export default function AuthView() {
               </button>
             </div>
           </div>
-          {isLogin ? <LoginForm /> : <RegisterForm />}
+          {isLogin ? <LoginForm /> : <RegisterForm setIsLogin={setIsLogin} />}
         </div>
       </div>
+      <ToastContainer pauseOnHover={false} pauseOnFocusLoss={false} />
     </>
   );
 }
